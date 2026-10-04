@@ -56,7 +56,7 @@ java -cp out Main
 | Menu utama | Fungsi |
 |---|---|
 | 1 | Menu penerbangan: `11` cari (asal, tujuan, tanggal, penumpang) lalu pilih ID untuk memesan, `12` pesan langsung dengan ID, `13` lihat semua |
-| 2 | Menu hotel: `21` cari (kota, check-in, check-out, tamu) lalu pilih ID untuk memesan, `22` lihat semua |
+| 2 | Menu hotel: `21` cari (kota, check-in, check-out, tamu) lalu pilih ID untuk memesan, `22` pesan langsung dengan ID, `23` lihat semua |
 | 3 | Batalkan reservasi dengan nomor konfirmasi (penerbangan maupun hotel) |
 | 4 | Lihat semua pemesanan + total nilai |
 | 99 | Keluar |

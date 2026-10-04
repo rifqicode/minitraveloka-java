@@ -22,13 +22,15 @@ public class HotelMenu {
         while (true) {
             System.out.println("\n--- Menu Hotel ---");
             System.out.println("21. Cari Hotel");
-            System.out.println("22. Lihat Semua Hotel");
+            System.out.println("22. Pesan Hotel (langsung dengan ID)");
+            System.out.println("23. Lihat Semua Hotel");
             System.out.println("0.  Kembali ke Menu Utama");
 
             int choice = input.readInt("Pilih opsi: ");
             switch (choice) {
                 case 21 -> handleSearchHotel();
-                case 22 -> hotelService.getAllHotels().forEach(System.out::println);
+                case 22 -> handleBookHotel();
+                case 23 -> hotelService.getAllHotels().forEach(System.out::println);
                 case 0 -> { return; }
                 default -> System.out.println("Pilihan tidak valid. Silakan coba lagi.");
             }
@@ -80,5 +82,21 @@ public class HotelMenu {
         } catch (IllegalArgumentException | IllegalStateException e) {
             System.out.println("\n[!] Pemesanan gagal: " + e.getMessage());
         }
+    }
+
+    private void handleBookHotel() {
+        System.out.println("\n[ Pemesanan Hotel ]");
+        int id = input.readInt("Masukkan ID hotel yang ingin dipesan: ");
+        try {
+            System.out.println(hotelService.getHotelById(id));
+        } catch (IllegalArgumentException e) {
+            System.out.println("\n[!] " + e.getMessage());
+            return;
+        }
+
+        LocalDate checkIn = input.readDate("Masukkan tanggal check-in (yyyy-MM-dd): ", LocalDate.now());
+        LocalDate checkOut = input.readDate("Masukkan tanggal check-out (yyyy-MM-dd): ", checkIn.plusDays(1));
+        int guests = input.readPositiveInt("Masukkan jumlah tamu: ");
+        processBooking(id, checkIn, checkOut, guests);
     }
 }
