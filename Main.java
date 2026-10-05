@@ -12,12 +12,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         ConsoleInput input = new ConsoleInput(scanner);
 
-  
+        // Inisialisasi Services (ReservationService dipakai bersama oleh penerbangan & hotel)
         ReservationService reservationService = new ReservationService();
         FlightService flightService = new FlightService(reservationService);
         HotelService hotelService = new HotelService(reservationService);
 
-     
+        // Inisialisasi Menus (Views)
         FlightMenu flightMenu = new FlightMenu(flightService, input);
         HotelMenu hotelMenu = new HotelMenu(hotelService, input);
         ReservationMenu reservationMenu = new ReservationMenu(reservationService, input);

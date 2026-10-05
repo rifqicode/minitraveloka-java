@@ -43,20 +43,12 @@ minitraveloka-java/
 
 Butuh **JDK 17 atau lebih baru** (memakai sealed class, pattern matching, dan text block).
 
-```bash
-# dari root proyek
-javac -d out Main.java
-java -cp out Main
-```
-
-
-
 ## Cara Pakai (ringkas)
 
 | Menu utama | Fungsi |
 |---|---|
 | 1 | Menu penerbangan: `11` cari (asal, tujuan, tanggal, penumpang) lalu pilih ID untuk memesan, `12` pesan langsung dengan ID, `13` lihat semua |
-| 2 | Menu hotel: `21` cari (kota, check-in, check-out, tamu) lalu pilih ID untuk memesan, `22` lihat semua |
+| 2 | Menu hotel: `21` cari (kota, check-in, check-out, tamu) lalu pilih ID untuk memesan, `22` lihat semua, `23` pesan langsung dengan ID |
 | 3 | Batalkan reservasi dengan nomor konfirmasi (penerbangan maupun hotel) |
 | 4 | Lihat semua pemesanan + total nilai |
 | 99 | Keluar |

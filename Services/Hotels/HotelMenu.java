@@ -23,12 +23,14 @@ public class HotelMenu {
             System.out.println("\n--- Menu Hotel ---");
             System.out.println("21. Cari Hotel");
             System.out.println("22. Lihat Semua Hotel");
+            System.out.println("23. Pesan Hotel (langsung dengan ID)");
             System.out.println("0.  Kembali ke Menu Utama");
 
             int choice = input.readInt("Pilih opsi: ");
             switch (choice) {
                 case 21 -> handleSearchHotel();
                 case 22 -> hotelService.getAllHotels().forEach(System.out::println);
+                case 23 -> handleBookHotel();
                 case 0 -> { return; }
                 default -> System.out.println("Pilihan tidak valid. Silakan coba lagi.");
             }
@@ -69,6 +71,30 @@ public class HotelMenu {
             }
             System.out.println("[!] ID " + id + " tidak ada dalam hasil pencarian.");
         }
+    }
+
+    private void handleBookHotel() {
+        System.out.println("\n[ Pemesanan Hotel ]");
+        int id = input.readInt("Masukkan ID hotel yang ingin dipesan: ");
+        Hotel hotel;
+        try {
+            hotel = hotelService.getHotelById(id);
+        } catch (IllegalArgumentException e) {
+            System.out.println("\n[!] " + e.getMessage());
+            return;
+        }
+        System.out.println(hotel);
+
+        LocalDate checkIn = input.readDate("Masukkan tanggal check-in (yyyy-MM-dd): ", LocalDate.now());
+        LocalDate checkOut = input.readDate("Masukkan tanggal check-out (yyyy-MM-dd): ", checkIn.plusDays(1));
+        int guests = input.readPositiveInt("Masukkan jumlah tamu: ");
+
+        long nights = ChronoUnit.DAYS.between(checkIn, checkOut);
+        int rooms = hotel.roomsNeeded(guests);
+        System.out.println("Estimasi Total    : " + CurrencyFormatter.rupiah(hotel.getPricePerNight() * nights * rooms)
+                + " (" + nights + " malam, " + rooms + " kamar)");
+
+        processBooking(id, checkIn, checkOut, guests);
     }
 
     private void processBooking(int hotelId, LocalDate checkIn, LocalDate checkOut, int guests) {
